@@ -2,7 +2,7 @@
 
 # States
 K = 3
-# Transition probs - self
+# Transition probs - self. States are pretty sticky.
 p11 <- 0.9
 p22 <- 0.8
 # Transition matrix
@@ -37,3 +37,4 @@ plot(y, type = "l",
      ylab = "Observation Value",
      xlab = "Time")
 
+write.csv(data.frame(y=y, z=z), "simulated_data.csv", row.names = FALSE)
