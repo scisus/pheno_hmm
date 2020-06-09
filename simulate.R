@@ -9,7 +9,7 @@ p22 <- 0.8
 theta <- rbind(c(p11, 1-p11, 0), c(0, p22, 1-p22), c(0,0,1))
 
 # emission vector (3 states). Observations are very likely to match the true state, but sometimes observers screw up. When observers screw up, they're more likely to choose an adjacent state.
-psi <- rbind(c(0.99, 0.009, 0.001), c(0.005, 0.99 , 0.005), c(0.001, 0.009, 0.99))
+phi <- rbind(c(0.99, 0.009, 0.001), c(0.005, 0.99 , 0.005), c(0.001, 0.009, 0.99))
 
 # obs
 N = 100
@@ -23,7 +23,7 @@ for (i in 2:N) {
 # observations
 y <- c()
 for (i in 1:N) {
-    y[i] <- sample(1:K, 1, replace = TRUE, prob = psi[z[i],])
+    y[i] <- sample(1:K, 1, replace = TRUE, prob = phi[z[i],])
 }
 
 # visualization
