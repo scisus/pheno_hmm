@@ -5,20 +5,34 @@ data {
 
     int<lower=1, upper=K> y[N]; // observations
 
-    vector<lower=0>[K] alpha; //transition prior
-    vector<lower=0>[K] beta; //emission prior
+    vector<lower=0>[K] beta; //emission prior param
 }
 
 parameters {
-    simplex[K] theta[K]; //transition probs
+    //vector<lower=0>[K] alpha; //transition prior
+    real<lower=0, upper=1> a; //transition prior
+    real<lower=0, upper=1> b; //transition prior 2
+
+    //simplex[K] theta[K]; //transition probs
     simplex[K] phi[K]; // emission probs
+}
+
+transformed parameters {
+     simplex[K] theta[K]
+     = { [a, 1-a, 0]',
+         [0, b, 1-b]',
+         [0, 0, 1]' };
 }
 
 model {
     // priors
-    for (k in 1:K) {
-        theta[k] ~ dirichlet(alpha);
-    }
+    // for (k in 1:K) {
+    //     theta[k] ~ dirichlet(alpha);
+    // }
+
+    a ~ beta(2,2);
+    b ~ beta(2,2);
+
     for (k in 1:K) {
         phi[k] ~ dirichlet(beta);
     }
