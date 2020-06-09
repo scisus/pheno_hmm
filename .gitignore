@@ -43,3 +43,6 @@ vignettes/*.pdf
 # pkgdown site
 docs/
 .Rproj.user
+
+# R objects
+*.rds
